@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetLoader {
-    public static Texture bgTexture;
-    public static Texture grassTexture;
-    public static Texture birdTexture, birdUpTexture, birdDownTexture;
-    public static Texture pipeEndTexture, pipeTexture;
+    private static Texture bgTexture;
+    private static Texture grassTexture;
+    private static Texture birdTexture, birdUpTexture, birdDownTexture;
+    private static Texture pipeEndTexture, pipeTexture;
 
     public static TextureRegion bg;
     public static TextureRegion grass;
