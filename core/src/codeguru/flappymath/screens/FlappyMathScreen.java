@@ -1,6 +1,9 @@
-package codeguru.flappymath;
+package codeguru.flappymath.screens;
 
 import com.badlogic.gdx.Screen;
+
+import codeguru.flappymath.gameworld.FlappyMathRenderer;
+import codeguru.flappymath.gameworld.FlappyMathWorld;
 
 public class FlappyMathScreen implements Screen {
 

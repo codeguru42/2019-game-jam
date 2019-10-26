@@ -1,4 +1,4 @@
-package codeguru.flappymath;
+package codeguru.flappymath.gameworld;
 
 import com.badlogic.gdx.math.Rectangle;
 
