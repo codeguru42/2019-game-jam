@@ -13,13 +13,14 @@ import codeguru.flappymath.helpers.AssetLoader;
 public class FlappyMathRenderer {
     private static final int GROUND_HEIGHT = 52;
     private static final int GRASS_HEIGHT = 11;
+    private static final int BACKGROUND_HEIGHT = 43;
 
     private final FlappyMathWorld world;
     private final int gameWidth;
     private OrthographicCamera camera = new OrthographicCamera();
     private ShapeRenderer shapeRenderer = new ShapeRenderer();
     private SpriteBatch batch = new SpriteBatch();
-
+    private final Bird bird;
     private int gameHeight;
 
     private Color skyColor = new Color(128.0f / 255.0f, 209.0f / 255.0f, 230.0f / 255.0f, 1.0f);
@@ -33,6 +34,7 @@ public class FlappyMathRenderer {
         this.camera.setToOrtho(false, this.gameWidth, this.gameHeight);
         this.batch.setProjectionMatrix(camera.combined);
         this.shapeRenderer.setProjectionMatrix(camera.combined);
+        this.bird = this.world.getBird();
     }
 
     public void render(float runTime) {
@@ -46,12 +48,44 @@ public class FlappyMathRenderer {
         shapeRenderer.rect(0, 0, gameWidth, GROUND_HEIGHT);
         shapeRenderer.end();
 
-        Bird bird = world.getBird();
         batch.begin();
         batch.disableBlending();
-        batch.draw(AssetLoader.bg, 0, GROUND_HEIGHT + GRASS_HEIGHT, gameWidth, 43);
+
+        batch.draw(
+            AssetLoader.bg,
+            0,
+            GROUND_HEIGHT + GRASS_HEIGHT,
+            gameWidth,
+            BACKGROUND_HEIGHT
+        );
         batch.enableBlending();
-        batch.draw(AssetLoader.birdAnimation.getKeyFrame(runTime), bird.getX(), bird.getY(), bird.getWidth(), bird.getHeight());
+        if (bird.shouldntFlap()) {
+            batch.draw(
+                AssetLoader.bird,
+                bird.getX(),
+                bird.getY(),
+                bird.getWidth() / 2.0f,
+                bird.getHeight() / 2.0f,
+                bird.getWidth(),
+                bird.getHeight(),
+                1.0f,
+                1.0f,
+                bird.getRotation()
+            );
+        } else {
+            batch.draw(
+                AssetLoader.birdAnimation.getKeyFrame(runTime),
+                bird.getX(),
+                bird.getY(),
+                bird.getWidth() / 2.0f,
+                bird.getHeight() / 2.0f,
+                bird.getWidth(),
+                bird.getHeight(),
+                1.0f,
+                1.0f,
+                bird.getRotation()
+            );
+        }
         batch.end();
     }
 }

@@ -2,30 +2,40 @@ package codeguru.flappymath.helpers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetLoader {
-    public static Texture bg;
-    public static Texture grass;
-    public static Animation<Texture> birdAnimation;
-    public static Texture bird, birdUp, birdDown;
+    public static Texture bgTexture;
+    public static Texture grassTexture;
+    public static Texture birdTexture, birdUpTexture, birdDownTexture;
+
+    public static TextureRegion bg;
+    public static TextureRegion grass;
+    public static TextureRegion bird, birdUp, birdDown;
+    public static Animation<TextureRegion> birdAnimation;
 
     public static void load() {
-        bg = new Texture("bg.png");
-        grass = new Texture("grass.png");
-        bird = new Texture("bird.png");
-        birdUp = new Texture("bird-up.png");
-        birdDown = new Texture("bird-down.png");
+        grassTexture = new Texture("grass.png");
+        bgTexture = new Texture("bg.png");
+        birdTexture = new Texture("bird.png");
+        birdUpTexture = new Texture("bird-up.png");
+        birdDownTexture = new Texture("bird-down.png");
 
-        Texture[] birds = {birdDown, bird, birdUp};
-        birdAnimation = new Animation<Texture>(0.06f, birds);
+        bg = new TextureRegion(bgTexture);
+        grass = new TextureRegion(grassTexture);
+        bird = new TextureRegion(birdTexture);
+        birdUp = new TextureRegion(birdUpTexture);
+        birdDown = new TextureRegion(birdDownTexture);
+        TextureRegion[] birds = {birdDown, bird, birdUp};
+        birdAnimation = new Animation<>(0.06f, birds);
         birdAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
     }
 
     public static void dispose() {
-        bg.dispose();
-        grass.dispose();
-        bird.dispose();
-        birdUp.dispose();
-        birdDown.dispose();
+        bgTexture.dispose();
+        grassTexture.dispose();
+        birdTexture.dispose();
+        birdUpTexture.dispose();
+        birdDownTexture.dispose();
     }
 }
