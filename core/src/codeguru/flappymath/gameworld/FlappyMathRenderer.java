@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import codeguru.flappymath.gameobjects.Bird;
+import codeguru.flappymath.gameobjects.Grass;
+import codeguru.flappymath.gameobjects.ScrollHandler;
 import codeguru.flappymath.helpers.AssetLoader;
 
 public class FlappyMathRenderer {
@@ -17,11 +19,13 @@ public class FlappyMathRenderer {
 
     private final FlappyMathWorld world;
     private final int gameWidth;
+    private int gameHeight;
     private OrthographicCamera camera = new OrthographicCamera();
     private ShapeRenderer shapeRenderer = new ShapeRenderer();
     private SpriteBatch batch = new SpriteBatch();
     private final Bird bird;
-    private int gameHeight;
+    private ScrollHandler scroller;
+    private Grass frontGrass, backGrass;
 
     private Color skyColor = new Color(128.0f / 255.0f, 209.0f / 255.0f, 230.0f / 255.0f, 1.0f);
     private Color grassColor = new Color(111 / 255.0f, 186 / 255.0f, 45 / 255.0f, 1);
@@ -34,7 +38,11 @@ public class FlappyMathRenderer {
         this.camera.setToOrtho(false, this.gameWidth, this.gameHeight);
         this.batch.setProjectionMatrix(camera.combined);
         this.shapeRenderer.setProjectionMatrix(camera.combined);
+
         this.bird = this.world.getBird();
+        this.scroller = this.world.getScroller();
+        this.frontGrass = this.scroller.getFrontGrass();
+        this.backGrass = this.scroller.getBackGrass();
     }
 
     public void render(float runTime) {
@@ -58,6 +66,7 @@ public class FlappyMathRenderer {
             gameWidth,
             BACKGROUND_HEIGHT
         );
+        drawGrass();
         batch.enableBlending();
         if (bird.shouldntFlap()) {
             batch.draw(
@@ -87,5 +96,22 @@ public class FlappyMathRenderer {
             );
         }
         batch.end();
+    }
+
+    private void drawGrass() {
+        batch.draw(
+            AssetLoader.grass,
+            frontGrass.getX(),
+            frontGrass.getY(),
+            frontGrass.getWidth(),
+            frontGrass.getHeight()
+        );
+        batch.draw(
+            AssetLoader.grass,
+            backGrass.getX(),
+            backGrass.getY(),
+            backGrass.getWidth(),
+            backGrass.getHeight()
+        );
     }
 }
