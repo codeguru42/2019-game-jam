@@ -22,7 +22,7 @@ public class FlappyMathScreen implements Screen {
         int midPointY = (int) (gameHeight / 2);
 
         world = new FlappyMathWorld(midPointY);
-        renderer = new FlappyMathRenderer(world, (int)gameHeight, midPointY);
+        renderer = new FlappyMathRenderer(world, (int)gameHeight);
 
         Gdx.input.setInputProcessor(new InputHandler(world.getBird()));
     }
