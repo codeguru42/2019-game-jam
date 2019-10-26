@@ -5,6 +5,9 @@ import com.badlogic.gdx.math.Vector2;
 public class Bird {
     private static final int ACCELERATION_Y = -460;
     private static final int CLICK_VELOCITY_Y = 140;
+    private static final int MAXIMUM_ROTATION = 20;
+    private static final int MINIMUM_ROTATION = -90;
+    private static final int MINIMUM_VELOCITY = -200;
 
     private Vector2 position;
     private Vector2 velocity;
@@ -25,8 +28,8 @@ public class Bird {
     public void update(float delta) {
         velocity.add(acceleration.cpy().scl(delta));
 
-        if (velocity.y < -200) {
-            velocity.y = -200;
+        if (velocity.y < MINIMUM_VELOCITY) {
+            velocity.y = MINIMUM_VELOCITY;
         }
 
         position.add(velocity.cpy().scl(delta));
@@ -38,15 +41,15 @@ public class Bird {
         if (velocity.y > 0) {
             rotation += 600 * delta;
 
-            if (rotation > 20) {
-                rotation = 20;
+            if (rotation > MAXIMUM_ROTATION) {
+                rotation = MAXIMUM_ROTATION;
             }
         }
 
         if (isFalling()) {
             rotation -= 480 * delta;
-            if (rotation < -90) {
-                rotation = -90;
+            if (rotation < MINIMUM_ROTATION) {
+                rotation = MINIMUM_ROTATION;
             }
         }
     }
