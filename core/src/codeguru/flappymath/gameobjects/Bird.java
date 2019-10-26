@@ -16,7 +16,7 @@ public class Bird {
         this.width = width;
         this.height = height;
         this.velocity = new Vector2(0, 0);
-        this.acceleration = new Vector2(0, 460);
+        this.acceleration = new Vector2(0, 0);
     }
 
     public void update(float delta) {
