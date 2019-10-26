@@ -3,6 +3,9 @@ package codeguru.flappymath.gameobjects;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bird {
+    private static final int ACCELERATION_Y = -460;
+    private static final int CLICK_VELOCITY_Y = 140;
+
     private Vector2 position;
     private Vector2 velocity;
     private Vector2 acceleration;
@@ -16,7 +19,7 @@ public class Bird {
         this.width = width;
         this.height = height;
         this.velocity = new Vector2(0, 0);
-        this.acceleration = new Vector2(0, 0);
+        this.acceleration = new Vector2(0, ACCELERATION_Y);
     }
 
     public void update(float delta) {
@@ -30,7 +33,7 @@ public class Bird {
     }
 
     public void onClick() {
-        velocity.y = -140;
+        velocity.y = CLICK_VELOCITY_Y;
     }
 
     public float getX() {
