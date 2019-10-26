@@ -8,11 +8,13 @@ public class AssetLoader {
     public static Texture bgTexture;
     public static Texture grassTexture;
     public static Texture birdTexture, birdUpTexture, birdDownTexture;
+    public static Texture pipeEndTexture, pipeTexture;
 
     public static TextureRegion bg;
     public static TextureRegion grass;
     public static TextureRegion bird, birdUp, birdDown;
     public static Animation<TextureRegion> birdAnimation;
+    public static TextureRegion pipeUp, pipeDown, pipe;
 
     public static void load() {
         grassTexture = new Texture("grass.png");
@@ -20,6 +22,8 @@ public class AssetLoader {
         birdTexture = new Texture("bird.png");
         birdUpTexture = new Texture("bird-up.png");
         birdDownTexture = new Texture("bird-down.png");
+        pipeEndTexture = new Texture("pipe-end.png");
+        pipeTexture = new Texture("pipe.png");
 
         bg = new TextureRegion(bgTexture);
         grass = new TextureRegion(grassTexture);
@@ -29,6 +33,10 @@ public class AssetLoader {
         TextureRegion[] birds = {birdDown, bird, birdUp};
         birdAnimation = new Animation<>(0.06f, birds);
         birdAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+        pipeUp = new TextureRegion(pipeEndTexture);
+        pipeDown = new TextureRegion(pipeEndTexture);
+        pipeDown.flip(false, true);
+        pipe = new TextureRegion(pipeTexture);
     }
 
     public static void dispose() {
@@ -37,5 +45,7 @@ public class AssetLoader {
         birdTexture.dispose();
         birdUpTexture.dispose();
         birdDownTexture.dispose();
+        pipeTexture.dispose();
+        pipeTexture.dispose();
     }
 }
